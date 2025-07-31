@@ -1,12 +1,13 @@
 import colors from '@/theme/colors';
 import React from 'react';
-import { StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, ViewStyle } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function GradientBackground({children, style}: {children: React.ReactNode; style?: ViewStyle;}) {
   return (
-        <View style={[styles.container, style]}>
+        <SafeAreaView style={[styles.container, style]}>
           {children}
-        </View>
+        </SafeAreaView>
   
   );
 }

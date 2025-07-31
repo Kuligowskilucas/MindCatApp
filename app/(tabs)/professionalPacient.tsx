@@ -4,9 +4,9 @@ import colors from '../../theme/colors';
 
 import Background from '@/components/Background';
 
-export default function TabTwoScreen() {
+export default function professionalPacient() {
   return (
-    <Background style={styles.background}>
+    <Background style={styles.container}>
       <Image source={require('../../assets/images/homepage/icone.png')} resizeMode='contain' style={styles.image}/>
       <Text style={styles.text}>
         Primeiramente precisamos saber se você é um profissional ou um paciente
@@ -22,12 +22,12 @@ export default function TabTwoScreen() {
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
+
+  container: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 16,
   },
+  
   image: {
     width: 200,
     height: 200,

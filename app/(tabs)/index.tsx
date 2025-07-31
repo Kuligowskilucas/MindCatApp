@@ -8,7 +8,7 @@ export default function HomeScreen() {
   const router = useRouter();
 
   return (
-      <Background style={styles.background}>
+      <Background style={styles.container}>
         <Image source={require('../../assets/images/homepage/icone.png')} resizeMode='contain' style={styles.image}/>
         <Image source={require('../../assets/images/homepage/assinatura.png')} resizeMode='contain' style={styles.image}/>
       </Background>
@@ -17,14 +17,9 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
 
-   background: {
-    flex: 1,
+  container: {
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  container: {
-    padding: 24,
-    justifyContent: 'center',
   },
   title: {
     fontSize: 24,
