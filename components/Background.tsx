@@ -3,12 +3,17 @@ import React from 'react';
 import { StyleSheet, ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function GradientBackground({children, style}: {children: React.ReactNode; style?: ViewStyle;}) {
+type BackgroundProps = {
+  children: React.ReactNode;
+  style?: ViewStyle;
+  center?: boolean;
+};
+
+export default function Background({ children, style, center = false }: BackgroundProps) {
   return (
-        <SafeAreaView style={[styles.container, style]}>
-          {children}
-        </SafeAreaView>
-  
+    <SafeAreaView style={[styles.container, center && styles.centered, style]}>
+      {children}
+    </SafeAreaView>
   );
 }
 
@@ -17,7 +22,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 16,
     backgroundColor: colors.secondary,
-    
   },
-  
+  centered: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

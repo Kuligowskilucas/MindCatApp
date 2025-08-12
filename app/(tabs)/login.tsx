@@ -1,13 +1,14 @@
 import Background from '@/components/Background';
+import AppLogo from '@/components/ui/Logo';
 import colors from '@/theme/colors';
 import React from 'react';
-import { Image, KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput } from 'react-native';
+import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput } from 'react-native';
 
 export default function LoginScreen() {
   return (
     <Background>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.container}>
-        <Image source={require('@/assets/images/homepage/icone.png')} resizeMode="contain" style={styles.logo}/>
+        <AppLogo/>
 
         <Text style={styles.title}>
           Faça seu login para nos encontrarmos de novo :)
@@ -37,11 +38,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  logo: {
-    width: 100,
-    height: 100,
-    marginBottom: 24,
   },
   title: {
     fontSize: 16,

@@ -1,13 +1,14 @@
 import Background from '@/components/Background';
+import AppLogo from '@/components/ui/Logo';
 import colors from '@/theme/colors';
 import React from 'react';
-import { Image, KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput } from 'react-native';
+import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput } from 'react-native';
 
 export default function RegisterScreen() {
   return (
     <Background>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.container}>
-        <Image source={require('@/assets/images/homepage/icone.png')} resizeMode="contain" style={styles.logo}/>
+        <AppLogo/>
 
         <Text style={styles.title}>
           Muito bom te ter aqui, faça seu cadastro para a gente se conhecer :)
@@ -32,18 +33,13 @@ export default function RegisterScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: colors.secondary, // fundo azul claro
+    backgroundColor: colors.secondary, 
   },
   container: {
     flex: 1,
     paddingHorizontal: 24,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  logo: {
-    width: 100,
-    height: 100,
-    marginBottom: 24,
   },
   title: {
     fontSize: 16,
