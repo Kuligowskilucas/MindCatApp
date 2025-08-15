@@ -1,29 +1,32 @@
 import Background from '@/components/Background';
 import AppLogo from '@/components/ui/Logo';
 import colors from '@/theme/colors';
+import { Link } from 'expo-router';
 import React from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput } from 'react-native';
 
-export default function RegisterScreen() {
+export default function LoginScreen() {
   return (
     <Background>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.container}>
         <AppLogo/>
 
         <Text style={styles.title}>
-          Muito bom te ter aqui, faça seu cadastro para a gente se conhecer :)
+          Faça seu login para nos encontrarmos de novo :)
         </Text>
 
         <TextInput placeholder="E-mail" placeholderTextColor="#888" style={styles.input} keyboardType="email-address" autoCapitalize="none"/>
         <TextInput placeholder="Senha" placeholderTextColor="#888" style={styles.input} secureTextEntry/>
-        <TextInput placeholder="Confirmar Senha" placeholderTextColor="#888" style={styles.input} secureTextEntry/>
 
         <Pressable style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}>
-          <Text style={styles.buttonText}>Cadastrar</Text>
+          <Text style={styles.buttonText}>Login</Text>
         </Pressable>
 
-        <Text style={styles.link}>
-          Já tem cadastro? <Text style={styles.linkBold}>Clique aqui</Text>
+        <Text style={styles.link}>Esqueci minha senha</Text>
+        <Text style={styles.link}>Ainda não tem cadastro? 
+          <Link href={'/register'}>
+            <Text style={styles.linkBold}> Clique aqui</Text>
+          </Link>
         </Text>
       </KeyboardAvoidingView>
     </Background>
@@ -33,7 +36,7 @@ export default function RegisterScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: colors.secondary, 
+    backgroundColor: colors.secondary, // Azul claro agradável
   },
   container: {
     flex: 1,

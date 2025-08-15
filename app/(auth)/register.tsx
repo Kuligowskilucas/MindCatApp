@@ -1,28 +1,31 @@
 import Background from '@/components/Background';
 import AppLogo from '@/components/ui/Logo';
 import colors from '@/theme/colors';
+import { Link } from 'expo-router';
 import React from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput } from 'react-native';
 
-export default function LoginScreen() {
+export default function RegisterScreen() {
   return (
     <Background>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.container}>
         <AppLogo/>
 
         <Text style={styles.title}>
-          Faça seu login para nos encontrarmos de novo :)
+          Muito bom te ter aqui, faça seu cadastro para a gente se conhecer :)
         </Text>
 
         <TextInput placeholder="E-mail" placeholderTextColor="#888" style={styles.input} keyboardType="email-address" autoCapitalize="none"/>
         <TextInput placeholder="Senha" placeholderTextColor="#888" style={styles.input} secureTextEntry/>
+        <TextInput placeholder="Confirmar Senha" placeholderTextColor="#888" style={styles.input} secureTextEntry/>
 
         <Pressable style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}>
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={styles.buttonText}>Cadastrar</Text>
         </Pressable>
 
-        <Text style={styles.link}>Esqueci minha senha</Text>
-        <Text style={styles.link}>Ainda não tem cadastro? <Text style={styles.linkBold}>Clique aqui</Text></Text>
+        <Text style={styles.link}>
+          Já tem cadastro? <Link href={'/login'}> <Text style={styles.linkBold}>Clique aqui</Text></Link>
+        </Text>
       </KeyboardAvoidingView>
     </Background>
   );
@@ -31,7 +34,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: colors.secondary, // Azul claro agradável
+    backgroundColor: colors.secondary, 
   },
   container: {
     flex: 1,

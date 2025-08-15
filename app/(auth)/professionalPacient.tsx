@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text } from 'react-native';
 import colors from '../../theme/colors';
 
 import Background from '@/components/Background';
+import { Link } from 'expo-router';
 
 export default function professionalPacient() {
   return (
@@ -11,11 +12,17 @@ export default function professionalPacient() {
       <Text style={styles.text}>
         Primeiramente precisamos saber se você é um profissional ou um paciente
       </Text>
-      <Pressable onPress={() => console.log('profissional')} style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}>
-        <Text style={styles.buttonText}>Profissional</Text>
+      
+      <Pressable style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}>
+        <Link style={styles.link} href="../(tabs)/diary">
+          <Text style={styles.buttonText}>Profissional</Text>
+        </Link>
       </Pressable>
+      
       <Pressable style={({ pressed }) => [styles.button_2, pressed && styles.buttonPressed]}>
-        <Text style={styles.buttonText}>Paciente</Text>
+        <Link style={styles.link} href="/register">
+          <Text style={styles.buttonText}>Paciente</Text>
+        </Link>
       </Pressable>
     </Background>
   );
@@ -40,8 +47,6 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: colors.primary,
-    paddingVertical: 12,
-    paddingHorizontal: 24,
     borderRadius: 50,
     marginTop: 12,
   },
@@ -49,8 +54,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderColor: colors.primary,
     borderWidth: 3,
-    paddingVertical: 12,
-    paddingHorizontal: 32,
     borderRadius: 50,
     marginTop: 12,
   },
@@ -63,4 +66,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
+
+  link: {
+    paddingVertical: 12,
+    // paddingHorizontal: 24,
+    width: 128,
+    borderRadius: 50,
+    // backgroundColor: 'black',
+  }
 });
