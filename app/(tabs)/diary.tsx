@@ -17,22 +17,18 @@ export default function diary(){
     // console.log(editorState)
     return(
         <>
-        <Background style={styles.container}>
-            <View style={styles.areaTexto}>
-                <Link style={styles.link} href="/register">
-                  <Text style={styles.buttonText}>Profissional</Text>
-                </Link>
-                <AppLogo />
-                <Text style={styles.texto}>
-                    Aqui é sua zona segura, apenas você e seus pensamentos
-                </Text>
-            </View>
-            <Editor setPlainText={setPlainText} setEditorState={setEditorState}/>
-        </Background>
-        
-
-                
-              
+            <Background style={styles.container}>
+                <View style={styles.areaTexto}>
+                    <Link style={styles.link} href="/register">
+                      <Text style={styles.buttonText}>Profissional</Text>
+                    </Link>
+                    <AppLogo />
+                    <Text style={styles.texto}>
+                        Aqui é sua zona segura, apenas você e seus pensamentos
+                    </Text>
+                </View>
+                <Editor setPlainText={setPlainText} setEditorState={setEditorState}/>
+            </Background>
         </>
     );
 
@@ -60,10 +56,10 @@ const styles = StyleSheet.create({
     },
 
       buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    textAlign: 'center',
-  },
+        color: '#fff',
+        fontSize: 16,
+        textAlign: 'center',
+    },
 
   link: {
     paddingVertical: 12,
