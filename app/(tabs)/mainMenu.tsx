@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     textoHumor: {
         color: 'white',
         fontSize: 16,
+        width: '100%',
     },
 
     areaBotao: {
