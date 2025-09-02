@@ -17,10 +17,7 @@ export default function TabsLayout() {
         },
         tabBarActiveTintColor: "#fff",    
         tabBarInactiveTintColor: "#ccc",  
-        tabBarLabelStyle: {
-          fontSize: 12,
-          fontWeight: "600",
-        },
+        tabBarLabelStyle: { fontSize: 12, fontWeight: "600"},
         tabBarIcon: ({ color, size }) => {
           let iconName: keyof typeof Ionicons.glyphMap;
 

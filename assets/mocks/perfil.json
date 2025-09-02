@@ -1,0 +1,23 @@
+{
+  "paciente": {
+    "nome_completo": "Matheus Kunrath Mussi",
+    "foto_url": null,
+    "informacoes_gerais": {
+      "idade": 23,
+      "tempo_de_terapia": "6 meses",
+      "psicologo": "DR. Luciana"
+    },
+    "diagnostico_principal": {
+      "condicao": "Transtorno de Déficit de Atenção e Hiperatividade (TDAH) – Tipo Misto",
+      "cid11": "F90.2",
+      "data_do_diagnostico": "20/09/2020",
+      "diagnosticado_por": "DR. Luciana"
+    },
+    "resumo_e_caracteristicas_clinicas": {
+      "resumo": "O paciente apresenta um quadro de TDAH caracterizado por um padrão persistente de desatenção e hiperatividade-impulsividade que interfere no funcionamento e no desenvolvimento. Os sintomas mais proeminentes incluem:",
+      "sintomas_proeminentes": [
+        "Desatenção: Dificuldade em sustentar a atenção em tarefas, facilidade para se distrair"
+      ]
+    }
+  }
+}

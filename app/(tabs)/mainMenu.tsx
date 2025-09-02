@@ -1,5 +1,6 @@
 import Background from "@/components/Background";
 import MainMenuButton from "@/components/mainMenuButton";
+import PurpleSquare from "@/components/purpleSquare";
 import colors from '@/theme/colors';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -7,11 +8,11 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function mainMenu() {
     return(
         <Background center style={styles.containerPrincipal}>
-            <View style={styles.graficoHumor}>
+            <PurpleSquare>
                 <Text style={styles.textoHumor}>
                     Veja como está seu gráfico de humor
                 </Text>
-            </View>
+            </PurpleSquare>
             <View style={styles.areaBotao}>
                 <MainMenuButton link='/diary' icon={require('@/assets/images/livro.png')} title="Atividades">
                     Recomendação do gatinho para hoje
@@ -20,7 +21,7 @@ export default function mainMenu() {
                     Desabafe e deixe o gatinho te ajudar
                 </MainMenuButton>
                 <MainMenuButton link='/diary' icon={require('@/assets/images/calendario.png')} title="Como foi seu dia?">
-                    Conte como foi seu dia hoje
+                    Conte como foi seu dia
                 </MainMenuButton>
             </View>
         </Background>

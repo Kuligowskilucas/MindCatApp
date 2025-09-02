@@ -1,7 +1,6 @@
 import Background from '@/components/Background';
 import Editor from '@/components/dom-components/hello-dom';
 import AppLogo from '@/components/ui/Logo';
-import { Link } from 'expo-router';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -19,9 +18,6 @@ export default function diary(){
         <>
             <Background style={styles.container}>
                 <View style={styles.areaTexto}>
-                    <Link style={styles.link} href="/register">
-                      <Text style={styles.buttonText}>Profissional</Text>
-                    </Link>
                     <AppLogo />
                     <Text style={styles.texto}>
                         Aqui é sua zona segura, apenas você e seus pensamentos

@@ -31,8 +31,10 @@ export default function RootLayout() {
           headerStyle: { backgroundColor: colors.secondary }, 
           headerTintColor: '#fff',                           
           headerTitleStyle: { color: 'transparent' },
-          headerLeft: () => (
-            <Pressable onPress={() => router.push('/mainMenu')} style={{ marginLeft: 15 }}>
+          headerShown: true,
+          headerBackTitle: "Voltar",
+          headerRight: () => (
+            <Pressable onPress={() => router.push('/settings')} style={{ marginRight: 15 }}>
               <Ionicons name="settings-outline" size={24} color="#fff" />
             </Pressable>
           ),
