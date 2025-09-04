@@ -36,9 +36,9 @@ export default function Settings(){
                 <Link href="/settings/perfil" style={styles.botoesAreaBranca}>
                     <Text>Perfil</Text>
                 </Link>
-                <Link href="/settings/regiao" style={styles.botoesAreaBranca}>
+                {/* <Link href="/settings/regiao" style={styles.botoesAreaBranca}>
                     <Text>Região</Text>
-                </Link>
+                </Link> */}
                 <Link href="/settings/privacidade" style={styles.botoesAreaBranca}>
                     <Text>Privacidade</Text>
                 </Link>

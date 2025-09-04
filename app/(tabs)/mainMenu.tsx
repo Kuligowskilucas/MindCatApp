@@ -20,7 +20,7 @@ export default function mainMenu() {
                 <MainMenuButton link='/diary' icon={require('@/assets/images/diario.png')} title="Diário">
                     Desabafe e deixe o gatinho te ajudar
                 </MainMenuButton>
-                <MainMenuButton link='/diary' icon={require('@/assets/images/calendario.png')} title="Como foi seu dia?">
+                <MainMenuButton link='/emotionGraphic' icon={require('@/assets/images/calendario.png')} title="Como foi seu dia?">
                     Conte como foi seu dia
                 </MainMenuButton>
             </View>

@@ -14,15 +14,22 @@ export default function RootLayout() {
 
   const router = useRouter();
   const { user, loading } = useAuth();
-  if(loading) return null;
 
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),});
 
-  if (!loaded) {
-    return null;
-  }
+
+  // useEffect(() => {
+  // if(!loading && loaded){
+  //   router.replace("/emotionGraphic")
+  // }
+
+  // }, [loading, loaded, router])
+
+  if(loading || !loaded) return null;
+
   console.log(user)
+
 
   return (
     <>
@@ -45,7 +52,8 @@ export default function RootLayout() {
         {
           
             <>
-              <Stack.Screen name="(tabs)"/>
+              <Stack.Screen name="emotionGraphic"/>
+              {/* <Stack.Screen name="(tabs)"/> */}
               {/* <Stack.Screen name="(modals)" options={{ presentation: "modal" }} /> */}
               {/* <Stack.Screen name="professionalPaciente/[id]" /> */}
               {/* <Stack.Screen name='(auth)' /> */}
