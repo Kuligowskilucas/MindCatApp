@@ -1,24 +1,26 @@
-// app/(auth)/register.tsx (ou o caminho que você estiver usando)
+import Background from "@/components/Background";
+import AppLogo from "@/components/ui/Logo";
+import colors from "@/theme/colors";
+import { Link, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
+  ActivityIndicator,
+  Alert,
   KeyboardAvoidingView,
   Platform,
   Pressable,
   StyleSheet,
   Text,
   TextInput,
-  Alert,
-  ActivityIndicator,
 } from "react-native";
-import { Link, useRouter } from "expo-router";
-
-import Background from "@/components/Background";
-import AppLogo from "@/components/ui/Logo";
-import colors from "@/theme/colors";
 import { register } from "../../src/services/auth";
 
 export default function RegisterScreen() {
   const router = useRouter();
+  const { role } = useLocalSearchParams<{ role?: string }>();
+
+  const userRole = role === "pro" ? "pro" : "patient";
+  const roleLabel = userRole === "pro" ? "Profissional" : "Paciente";
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -31,7 +33,6 @@ export default function RegisterScreen() {
       Alert.alert("Atenção", "Preencha todos os campos.");
       return;
     }
-
     if (password !== confirmPassword) {
       Alert.alert("Erro", "As senhas não coincidem.");
       return;
@@ -39,25 +40,17 @@ export default function RegisterScreen() {
 
     try {
       setLoading(true);
-
       const response = await register({
         name,
         email,
         password,
-        role: "pro", // ou "paciente" / o que fizer sentido pra você
+        role: userRole,
       });
 
-      console.log("Resposta do register:", response);
-
-      Alert.alert("Sucesso", response.message || "Usuário registrado com sucesso!", [
-        {
-          text: "Ok",
-          onPress: () => router.replace("/login"), // depois do cadastro, vai pra tela de login
-        },
+      Alert.alert("Sucesso", response.message || "Cadastro realizado!", [
+        { text: "Ok", onPress: () => router.replace("/login") },
       ]);
     } catch (error: any) {
-      console.log("Erro no register:", error?.response?.data || error?.message);
-
       const msg =
         error?.response?.data?.message ||
         "Não foi possível realizar o cadastro. Tente novamente.";
@@ -74,11 +67,13 @@ export default function RegisterScreen() {
         style={styles.container}
       >
         <AppLogo />
+
+        <Text style={styles.badge}>Cadastro como {roleLabel}</Text>
+
         <Text style={styles.title}>
           Muito bom te ter aqui, faça seu cadastro para a gente se conhecer :)
         </Text>
 
-        {/* Nome */}
         <TextInput
           placeholder="Nome"
           placeholderTextColor="#888"
@@ -86,8 +81,6 @@ export default function RegisterScreen() {
           value={name}
           onChangeText={setName}
         />
-
-        {/* Email */}
         <TextInput
           placeholder="E-mail"
           placeholderTextColor="#888"
@@ -97,8 +90,6 @@ export default function RegisterScreen() {
           value={email}
           onChangeText={setEmail}
         />
-
-        {/* Senha */}
         <TextInput
           placeholder="Senha"
           placeholderTextColor="#888"
@@ -107,8 +98,6 @@ export default function RegisterScreen() {
           value={password}
           onChangeText={setPassword}
         />
-
-        {/* Confirmar senha */}
         <TextInput
           placeholder="Confirmar Senha"
           placeholderTextColor="#888"
@@ -133,10 +122,10 @@ export default function RegisterScreen() {
           )}
         </Pressable>
 
-        <Text style={styles.link}>
-          Já tem cadastro?
-          <Link href={"/login"}>
-            <Text style={styles.linkBold}> Clique aqui</Text>
+        <Text style={styles.linkText}>
+          Já tem cadastro?{" "}
+          <Link href="/login">
+            <Text style={styles.linkBold}>Clique aqui</Text>
           </Link>
         </Text>
       </KeyboardAvoidingView>
@@ -145,15 +134,22 @@ export default function RegisterScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: colors.secondary,
-  },
   container: {
     flex: 1,
     paddingHorizontal: 24,
     justifyContent: "center",
     alignItems: "center",
+  },
+  badge: {
+    backgroundColor: colors.primary,
+    color: "#fff",
+    paddingHorizontal: 16,
+    paddingVertical: 6,
+    borderRadius: 20,
+    fontSize: 13,
+    fontWeight: "bold",
+    overflow: "hidden",
+    marginBottom: 12,
   },
   title: {
     fontSize: 16,
@@ -189,7 +185,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
   },
-  link: {
+  linkText: {
     color: "#000",
     fontSize: 14,
     marginTop: 16,

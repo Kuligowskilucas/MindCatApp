@@ -68,7 +68,7 @@ export default function LoginScreen() {
         <Text style={styles.link}>Esqueci minha senha</Text>
         <Text style={styles.link}>
           Ainda não tem cadastro?
-          <Link href="/register"><Text style={styles.linkBold}> Clique aqui</Text></Link>
+          <Link href="/professionalPacient"><Text style={styles.linkBold}> Clique aqui</Text></Link>
         </Text>
       </KeyboardAvoidingView>
     </Background>

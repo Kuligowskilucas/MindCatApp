@@ -1,47 +1,60 @@
-import { Image } from 'expo-image';
-import { Pressable, StyleSheet, Text } from 'react-native';
-import colors from '../../theme/colors';
+import Background from "@/components/Background";
+import colors from "@/theme/colors";
+import { Image } from "expo-image";
+import { useRouter } from "expo-router";
+import { Pressable, StyleSheet, Text } from "react-native";
 
-import Background from '@/components/Background';
-import { Link } from 'expo-router';
+export default function ProfessionalPacient() {
+  const router = useRouter();
 
-export default function professionalPacient() {
+  function goToRegister(role: "pro" | "patient") {
+    router.push({ pathname: "/register", params: { role } });
+  }
+
   return (
     <Background style={styles.container}>
-      <Image source={require('../../assets/images/homepage/icone.png')} resizeMode='contain' style={styles.image}/>
+      <Image
+        source={require("../../assets/images/homepage/icone.png")}
+        contentFit="contain"
+        style={styles.image}
+      />
       <Text style={styles.text}>
         Primeiramente precisamos saber se você é um profissional ou um paciente
       </Text>
-      
-      <Pressable style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}>
-        <Link style={styles.link} href="../(tabs)/diary">
-          <Text style={styles.buttonText}>Profissional</Text>
-        </Link>
+
+      <Pressable
+        style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
+        onPress={() => goToRegister("pro")}
+      >
+        <Text style={styles.buttonText}>Profissional</Text>
       </Pressable>
-      
-      <Pressable style={({ pressed }) => [styles.button_2, pressed && styles.buttonPressed]}>
-        <Link style={styles.link} href="/register">
-          <Text style={styles.buttonText}>Paciente</Text>
-        </Link>
+
+      <Pressable
+        style={({ pressed }) => [styles.button_2, pressed && styles.buttonPressed]}
+        onPress={() => goToRegister("patient")}
+      >
+        <Text style={styles.buttonText}>Paciente</Text>
+      </Pressable>
+
+      <Pressable onPress={() => router.push("/login")}>
+        <Text style={styles.link}>Já tenho conta? Fazer login</Text>
       </Pressable>
     </Background>
   );
 }
 
 const styles = StyleSheet.create({
-
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
-  
   image: {
     width: 200,
     height: 200,
   },
   text: {
     fontSize: 15,
-    textAlign: 'center',
+    textAlign: "center",
     paddingTop: 20,
     marginBottom: 20,
   },
@@ -49,29 +62,33 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     borderRadius: 50,
     marginTop: 12,
+    paddingVertical: 12,
+    width: 200,
+    alignItems: "center",
   },
   button_2: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     borderColor: colors.primary,
     borderWidth: 3,
     borderRadius: 50,
     marginTop: 12,
+    paddingVertical: 12,
+    width: 200,
+    alignItems: "center",
   },
   buttonPressed: {
     backgroundColor: colors.buttonClicked,
     borderColor: colors.buttonClicked,
   },
   buttonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: "center",
   },
-
   link: {
-    paddingVertical: 12,
-    // paddingHorizontal: 24,
-    width: 128,
-    borderRadius: 50,
-    // backgroundColor: 'black',
-  }
+    color: colors.primary,
+    marginTop: 24,
+    fontSize: 14,
+    fontWeight: "bold",
+  },
 });
