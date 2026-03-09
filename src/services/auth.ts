@@ -21,7 +21,28 @@ export type LaravelRegisterResponse = {
   token: string;
 };
 
+export type LoginPayload = {
+  email: string;
+  password: string;
+};
+
+export type LaravelLoginResponse = {
+  message: string;
+  user: {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+  };
+  token: string;
+};
+
 export async function register(payload: RegisterPayload): Promise<LaravelRegisterResponse> {
   const response = await api.post<LaravelRegisterResponse>("/register", payload);
+  return response.data;
+}
+
+export async function login(payload: LoginPayload): Promise<LaravelLoginResponse> {
+  const response = await api.post<LaravelLoginResponse>("/login", payload);
   return response.data;
 }

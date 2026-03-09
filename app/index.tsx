@@ -1,17 +1,8 @@
-// app/index.tsx
-import { Redirect } from 'expo-router';
-
-// se quiser, pode importar o mesmo useAuth que você usa no _layout
-const useAuth = () => ({ user: null, loading: false });
+import { Redirect } from "expo-router";
+import { useAuth } from "@/src/contexts/AuthContext";
 
 export default function Index() {
   const { user, loading } = useAuth();
-
   if (loading) return null;
-
-  if (!user) {
-    return <Redirect href="/(auth)/login" />;   // ou "/(auth)/login"
-  }
-
-  return <Redirect href="/(tabs)" />;
+  return <Redirect href={user ? "/(tabs)" : "/(auth)/login"} />;
 }
