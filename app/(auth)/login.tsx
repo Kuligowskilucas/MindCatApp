@@ -65,7 +65,9 @@ export default function LoginScreen() {
           {loading ? <ActivityIndicator color="#fff" /> : <Text style={styles.buttonText}>Login</Text>}
         </Pressable>
 
-        <Text style={styles.link}>Esqueci minha senha</Text>
+        <Pressable onPress={() => router.push("/forgotPassword")}>
+          <Text style={styles.link}>Esqueci minha senha</Text>
+        </Pressable>
         <Text style={styles.link}>
           Ainda não tem cadastro?
           <Link href="/professionalPacient"><Text style={styles.linkBold}> Clique aqui</Text></Link>

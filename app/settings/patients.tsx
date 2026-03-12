@@ -82,7 +82,10 @@ export default function PatientsScreen() {
       if (error?.response?.status === 404) {
         Alert.alert("Não encontrado", "Nenhum paciente com esse email.");
       } else {
-        Alert.alert("Erro", "Falha na busca.");
+        const status = error?.response?.status;
+        const msg = error?.response?.data?.message || error?.message || "Erro desconhecido";
+        console.log("Erro na busca:", status, msg);
+        Alert.alert("Erro", `${msg} (status: ${status})`);
       }
     } finally {
       setSearching(false);
