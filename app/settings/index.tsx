@@ -73,8 +73,8 @@ export default function Settings() {
               <Text>Meus Pacientes</Text>
             </Link>
           ) : (
-            <Link href="/#" style={styles.listaDoutores}>
-              <Text>Lista de doutores</Text>
+            <Link href="/settings/doctors" style={styles.listaDoutores}>
+              <Text>Meus Profissionais</Text>
             </Link>
           )}
         </View>
