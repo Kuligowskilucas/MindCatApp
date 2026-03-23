@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import {
   KeyboardAvoidingView, Platform, Pressable,
-  StyleSheet, Text, TextInput, Alert, ActivityIndicator,
+  StyleSheet, Text, Alert, ActivityIndicator,
 } from "react-native";
 import { Link, useRouter } from "expo-router";
 import Background from "@/components/Background";
+import InputField from "@/components/InputField";
 import AppLogo from "@/components/ui/Logo";
 import colors from "@/theme/colors";
 import { useAuth } from "@/src/contexts/AuthContext";
+import { validateEmail, validatePassword } from "@/src/utils/validation";
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -17,19 +19,24 @@ export default function LoginScreen() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const [errors, setErrors] = useState<{ email?: string | null; password?: string | null }>({});
+
+  function validate(): boolean {
+    const emailErr = validateEmail(email);
+    const passErr = validatePassword(password);
+    setErrors({ email: emailErr, password: passErr });
+    return !emailErr && !passErr;
+  }
+
   async function handleLogin() {
-    if (!email || !password) {
-      Alert.alert("Atenção", "Preencha todos os campos.");
-      return;
-    }
+    if (!validate()) return;
     try {
       setLoading(true);
-      await signIn({ email, password });
+      await signIn({ email: email.trim(), password });
       router.replace("/(tabs)");
     } catch (error: any) {
       const msg =
-        error?.response?.data?.message ||
-        "Email e/ou senha incorretos.";
+        error?.response?.data?.message || "Email e/ou senha incorretos.";
       Alert.alert("Erro", msg);
     } finally {
       setLoading(false);
@@ -47,15 +54,20 @@ export default function LoginScreen() {
           Faça seu login para nos encontrarmos de novo :)
         </Text>
 
-        <TextInput
-          placeholder="E-mail" placeholderTextColor="#888"
-          style={styles.input} keyboardType="email-address"
-          autoCapitalize="none" value={email} onChangeText={setEmail}
+        <InputField
+          placeholder="E-mail"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          value={email}
+          onChangeText={(t) => { setEmail(t); setErrors((e) => ({ ...e, email: null })); }}
+          error={errors.email}
         />
-        <TextInput
-          placeholder="Senha" placeholderTextColor="#888"
-          style={styles.input} secureTextEntry
-          value={password} onChangeText={setPassword}
+        <InputField
+          placeholder="Senha"
+          secureTextEntry
+          value={password}
+          onChangeText={(t) => { setPassword(t); setErrors((e) => ({ ...e, password: null })); }}
+          error={errors.password}
         />
 
         <Pressable
@@ -69,8 +81,8 @@ export default function LoginScreen() {
           <Text style={styles.link}>Esqueci minha senha</Text>
         </Pressable>
         <Text style={styles.link}>
-          Ainda não tem cadastro?
-          <Link href="/professionalPacient"><Text style={styles.linkBold}> Clique aqui</Text></Link>
+          Ainda não tem cadastro?{" "}
+          <Link href="/register"><Text style={styles.linkBold}>Clique aqui</Text></Link>
         </Text>
       </KeyboardAvoidingView>
     </Background>
@@ -78,32 +90,17 @@ export default function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: colors.secondary,
-  },
   container: {
     flex: 1,
     paddingHorizontal: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   title: {
     fontSize: 16,
-    textAlign: 'center',
-    color: '#000',
+    textAlign: "center",
+    color: "#000",
     marginBottom: 24,
-  },
-  input: {
-    width: '100%',
-    height: 48,
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: colors.primary,
-    backgroundColor: '#fff',
-    paddingHorizontal: 12,
-    fontSize: 16,
-    marginBottom: 16,
   },
   button: {
     backgroundColor: colors.primary,
@@ -111,25 +108,16 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 32,
     marginTop: 8,
-    width: '100%',
-    alignItems: 'center',
+    width: "100%",
+    alignItems: "center",
   },
-  buttonPressed: {
-    backgroundColor: colors.buttonClicked,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
-  },
+  buttonPressed: { backgroundColor: colors.buttonClicked },
+  buttonText: { color: "#fff", fontSize: 16, fontWeight: "600" },
   link: {
-    color: '#000',
+    color: "#000",
     fontSize: 14,
     marginTop: 16,
-    textAlign: 'center',
+    textAlign: "center",
   },
-  linkBold: {
-    fontWeight: 'bold',
-    color: colors.primary,
-  },
+  linkBold: { fontWeight: "bold", color: colors.primary },
 });
