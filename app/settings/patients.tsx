@@ -5,22 +5,16 @@ import { linkPatient, searchPatientByEmail, unlinkPatient } from "@/src/services
 import colors from "@/theme/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { useCallback, useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  Alert,
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { ActivityIndicator, Alert, FlatList, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { RefreshControl } from "react-native";
 
 export default function PatientsScreen() {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchEmail, setSearchEmail] = useState("");
   const [searching, setSearching] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
 
   const loadPatients = useCallback(async () => {
     try {
@@ -36,6 +30,12 @@ export default function PatientsScreen() {
 
   useEffect(() => {
     loadPatients();
+  }, [loadPatients]);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await loadPatients();
+    setRefreshing(false);
   }, [loadPatients]);
 
   async function handleSearch() {
@@ -156,6 +156,9 @@ export default function PatientsScreen() {
                 </Pressable>
               </View>
             )}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#fff" />
+            }
           />
         )}
       </PurpleSquare>

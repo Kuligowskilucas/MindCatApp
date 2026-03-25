@@ -3,18 +3,14 @@ import PurpleSquare from "@/components/purpleSquare";
 import { getMyProfessionals, Professional } from "@/src/services/link";
 import { Ionicons } from "@expo/vector-icons";
 import { useCallback, useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  Alert,
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { ActivityIndicator, Alert, FlatList, StyleSheet, Text, View } from "react-native";
+import { RefreshControl } from "react-native";
 
 export default function DoctorsScreen() {
   const [professionals, setProfessionals] = useState<Professional[]>([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+
 
   const load = useCallback(async () => {
     try {
@@ -30,6 +26,12 @@ export default function DoctorsScreen() {
 
   useEffect(() => {
     load();
+  }, [load]);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await load();
+    setRefreshing(false);
   }, [load]);
 
   return (
@@ -65,6 +67,9 @@ export default function DoctorsScreen() {
                 </View>
               </View>
             )}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#fff" />
+            }
           />
         )}
       </PurpleSquare>

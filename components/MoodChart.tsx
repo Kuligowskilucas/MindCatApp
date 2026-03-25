@@ -32,7 +32,7 @@ function getLast7Days(): { label: string; dateStr: string }[] {
   return days;
 }
 
-export default function MoodChart() {
+export default function MoodChart({ refreshKey }: { refreshKey?: number }) {
   const [moods, setMoods] = useState<MoodEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -51,7 +51,7 @@ export default function MoodChart() {
       }
     }
     load();
-  }, []);
+  }, [refreshKey]);
 
   if (loading) {
     return (

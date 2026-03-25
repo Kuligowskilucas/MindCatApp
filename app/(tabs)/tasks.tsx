@@ -1,29 +1,13 @@
 import PurpleSquare from "@/components/purpleSquare";
 import Background from "@/components/Background";
 import { useAuth } from "@/src/contexts/AuthContext";
-import {
-  createTask,
-  deleteTask,
-  getPatients,
-  getTasks,
-  markTaskDone,
-  Patient,
-  Task,
-} from "@/src/services/task";
+import { createTask, deleteTask, getPatients, getTasks, markTaskDone, Patient, Task } from "@/src/services/task";
 import colors from "@/theme/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { useCallback, useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  Alert,
-  FlatList,
-  Modal,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { ActivityIndicator, Alert, FlatList, Modal, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { RefreshControl } from "react-native";
+
 
 export default function Tasks() {
   const { user } = useAuth();
@@ -32,12 +16,14 @@ export default function Tasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // modal de criar tarefa (pro)
+
   const [modalVisible, setModalVisible] = useState(false);
   const [patients, setPatients] = useState<Patient[]>([]);
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
   const [newTitle, setNewTitle] = useState("");
   const [creating, setCreating] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
 
   const loadTasks = useCallback(async () => {
     try {
@@ -54,6 +40,12 @@ export default function Tasks() {
 
   useEffect(() => {
     loadTasks();
+  }, [loadTasks]);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await loadTasks();
+    setRefreshing(false);
   }, [loadTasks]);
 
   // ─── PACIENTE: CONCLUIR TAREFA ───
@@ -197,6 +189,9 @@ export default function Tasks() {
             renderItem={renderTask}
             style={{ maxHeight: 500 }}
             showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#fff" />
+            }
             ListHeaderComponent={
               activeTasks.length > 0 ? (
                 <Text style={styles.sectionLabel}>
