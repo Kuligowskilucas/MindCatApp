@@ -4,12 +4,19 @@ import { useAuth } from "@/src/contexts/AuthContext";
 import { getMe, UserWithProfile } from "@/src/services/user";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import { Pressable } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import colors from '@/theme/colors';
+
 
 export default function Perfil() {
   const { user } = useAuth();
   const [perfil, setPerfil] = useState<UserWithProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+
 
   useEffect(() => {
     async function load() {
@@ -81,6 +88,25 @@ export default function Perfil() {
             {perfil.profile?.tdah_reminder ? "Ativo" : "Inativo"}
           </Text>
         </View>
+
+        <Pressable
+          style={{
+            backgroundColor: "#fff",
+            borderRadius: 25,
+            paddingVertical: 12,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 8,
+            marginTop: 8,
+          }}
+          onPress={() => router.push("/settings/editProfile")}
+        >
+          <Ionicons name="create-outline" size={18} color={colors.primary} />
+          <Text style={{ color: colors.primary, fontWeight: "bold", fontSize: 15 }}>
+            Editar Perfil
+          </Text>
+        </Pressable>
       </PurpleSquare>
     </Background>
   );

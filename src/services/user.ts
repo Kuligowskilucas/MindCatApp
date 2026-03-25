@@ -18,7 +18,18 @@ export type UserWithProfile = {
   } | null;
 };
 
+export type UpdateProfilePayload = {
+  name?: string;
+  email?: string;
+  password?: string;
+};
+
+
 export async function getMe(): Promise<UserWithProfile> {
   const response = await api.get<UserWithProfile>("/me");
   return response.data;
+}
+
+export async function updateProfile(payload: UpdateProfilePayload): Promise<void> {
+  await api.put("/user/update", payload);
 }
