@@ -1,32 +1,59 @@
-import { Link, Stack } from 'expo-router';
-import { StyleSheet } from 'react-native';
-
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import Background from "@/components/Background";
+import PurpleSquare from "@/components/purpleSquare";
+import colors from "@/theme/colors";
+import { Link, Stack } from "expo-router";
+import { StyleSheet, Text } from "react-native";
 
 export default function NotFoundScreen() {
   return (
-    <>
-      <Stack.Screen options={{ title: 'Oops!' }} />
-      <ThemedView style={styles.container}>
-        <ThemedText type="title">This screen does not exist.</ThemedText>
-        <Link href="/" style={styles.link}>
-          <ThemedText type="link">Go to home screen!</ThemedText>
-        </Link>
-      </ThemedView>
-    </>
+      <>
+        <Stack.Screen options={{ title: "Ops!" }} />
+        <Background>
+          <PurpleSquare style={styles.container}>
+            <Text style={styles.emoji}>🐱❓</Text>
+            <Text style={styles.title}>Página não encontrada</Text>
+            <Text style={styles.desc}>
+              O gatinho procurou, mas essa tela não existe.
+            </Text>
+            <Link href="/" style={styles.link}>
+              <Text style={styles.linkText}>Voltar para o início</Text>
+            </Link>
+          </PurpleSquare>
+        </Background>
+      </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
+    alignItems: "center",
+    gap: 12,
+  },
+  emoji: {
+    fontSize: 48,
+  },
+  title: {
+    color: "#fff",
+    fontSize: 22,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  desc: {
+    color: "#fff",
+    fontSize: 15,
+    textAlign: "center",
+    opacity: 0.8,
   },
   link: {
-    marginTop: 15,
-    paddingVertical: 15,
+    backgroundColor: "#fff",
+    borderRadius: 25,
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    marginTop: 8,
+  },
+  linkText: {
+    color: colors.primary,
+    fontWeight: "bold",
+    fontSize: 15,
   },
 });
