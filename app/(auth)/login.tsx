@@ -82,7 +82,7 @@ export default function LoginScreen() {
         </Pressable>
         <Text style={styles.link}>
           Ainda não tem cadastro?{" "}
-          <Link href="/register"><Text style={styles.linkBold}>Clique aqui</Text></Link>
+          <Link href="/professionalPacient"><Text style={styles.linkBold}>Clique aqui</Text></Link>
         </Text>
       </KeyboardAvoidingView>
     </Background>

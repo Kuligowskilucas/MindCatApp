@@ -43,10 +43,10 @@ export default function OnboardingScreen() {
     }
   ).current;
 
-  async function handleFinish() {
+ async function handleFinish() {
     await AsyncStorage.setItem("onboarding_done", "true");
-    router.replace("/login");
-  }
+    router.replace("/professionalPacient");
+}
 
   function handleNext() {
     if (currentIndex < slides.length - 1) {

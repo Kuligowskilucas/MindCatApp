@@ -1,17 +1,17 @@
-import colors from '@/theme/colors';
-import { AuthProvider, useAuth } from '@/src/contexts/AuthContext';
+import colors from "@/theme/colors";
+import { AuthProvider, useAuth } from "@/src/contexts/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
-import { useFonts } from 'expo-font';
-import { Stack, useRouter, useSegments } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import { Pressable } from "react-native";
-import 'react-native-reanimated';
-
+import { useFonts } from "expo-font";
+import { Stack, useRouter, useSegments } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, Pressable, View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import "react-native-reanimated";
 
 export default function RootLayout() {
   const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
   if (!loaded) return null;
@@ -24,39 +24,60 @@ export default function RootLayout() {
   );
 }
 
-
 function RootNavigator() {
   const router = useRouter();
   const segments = useSegments();
   const { user, loading } = useAuth();
+  const [checkingOnboarding, setCheckingOnboarding] = useState(true);
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   useEffect(() => {
-    if (loading) return;
+    async function check() {
+      const done = await AsyncStorage.getItem("onboarding_done");
+      if (!done) setShowOnboarding(true);
+      setCheckingOnboarding(false);
+    }
+    check();
+  }, []);
 
-    const inAuth = segments[0] === '(auth)';
+  useEffect(() => {
+    if (loading || checkingOnboarding) return;
+
+    const inAuth = segments[0] === "(auth)";
 
     if (!user && !inAuth) {
-      // user deslogou ou token expirou → vai pro login limpando a stack
-      router.replace("/(auth)/login");
+      if (showOnboarding) {
+        router.replace("/(auth)/onboarding");
+      } else {
+        router.replace("/(auth)/login");
+      }
     } else if (user && inAuth) {
-      // user logou → sai da área de auth
       router.replace("/(tabs)");
     }
-  }, [user, loading, segments]);
+  }, [user, loading, segments, checkingOnboarding, showOnboarding]);
 
-  if (loading) return null;
+  if (loading || checkingOnboarding) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
 
   return (
     <Stack
       initialRouteName="(auth)"
       screenOptions={{
         headerStyle: { backgroundColor: colors.secondary },
-        headerTintColor: '#fff',
-        headerTitleStyle: { color: 'transparent' },
+        headerTintColor: "#fff",
+        headerTitleStyle: { color: "transparent" },
         headerShown: true,
         headerBackTitle: "Voltar",
         headerRight: () => (
-          <Pressable onPress={() => router.push('/settings')} style={{ marginRight: 15 }}>
+          <Pressable
+            onPress={() => router.push("/settings")}
+            style={{ marginRight: 15 }}
+          >
             <Ionicons name="settings-outline" size={24} color="#fff" />
           </Pressable>
         ),
