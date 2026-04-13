@@ -107,12 +107,21 @@ export default function Settings() {
         )}
 
         <Pressable
+          style={({ pressed }) => [styles.botaoDelete, pressed && { opacity: 0.7 }]}
+          onPress={() => router.push("/settings/deleteAccount" as any)}
+        >
+          <Ionicons name="trash-outline" size={18} color="#D9534F" />
+          <Text style={styles.botaoDeleteTexto}>Deletar conta</Text>
+        </Pressable>
+
+        <Pressable
           style={({ pressed }) => [styles.botaoLogout, pressed && { opacity: 0.7 }]}
           onPress={handleLogout}
         >
           <Ionicons name="log-out-outline" size={20} color="#fff" />
           <Text style={styles.botaoLogoutTexto}>Sair da conta</Text>
         </Pressable>
+        
       </WhiteSquare>
     </Background>
   );
@@ -175,6 +184,22 @@ const styles = StyleSheet.create({
   },
   botaoLogoutTexto: {
     color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+
+  botaoDelete: {
+    borderWidth: 2,
+    borderColor: "#D9534F",
+    borderRadius: 30,
+    paddingVertical: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+  },
+  botaoDeleteTexto: {
+    color: "#D9534F",
     fontSize: 16,
     fontWeight: "bold",
   },
