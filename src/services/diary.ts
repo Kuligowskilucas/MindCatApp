@@ -14,12 +14,11 @@ export async function storeDiaryEntry(content: string): Promise<DiaryEntry> {
 }
 
 export async function getDiaryEntries(diaryPassword: string): Promise<DiaryEntry[]> {
-  const response = await api.get("/diary", {
-    params: { diary_password: diaryPassword },
+  const response = await api.post("/diary/list", {
+    diary_password: diaryPassword,
   });
   return response.data;
 }
-
 export async function deleteDiaryEntry(id: number, diaryPassword: string): Promise<void> {
   await api.delete(`/diary/${id}`, {
     data: { diary_password: diaryPassword },
