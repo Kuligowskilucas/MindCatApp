@@ -8,8 +8,11 @@ export function validateEmail(email: string): string | null {
 }
 
 export function validatePassword(password: string): string | null {
-  if (!password) return "Senha é obrigatória.";
-  if (password.length < 6) return "Senha deve ter pelo menos 6 caracteres.";
+  if (!password) return "Digite a senha.";
+  if (password.length < 8) return "A senha deve ter pelo menos 8 caracteres.";
+  if (!/[A-Z]/.test(password)) return "A senha deve ter pelo menos uma letra maiúscula.";
+  if (!/[a-z]/.test(password)) return "A senha deve ter pelo menos uma letra minúscula.";
+  if (!/[0-9]/.test(password)) return "A senha deve ter pelo menos um número.";
   return null;
 }
 

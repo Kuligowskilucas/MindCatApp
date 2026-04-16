@@ -4,7 +4,6 @@ import PurpleSquare from "@/components/purpleSquare";
 import { useAuth } from "@/src/contexts/AuthContext";
 import { updateProfile } from "@/src/services/user";
 import { validateConfirmPassword, validateEmail, validateName, validatePassword } from "@/src/utils/validation";
-import colors from "@/theme/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -130,6 +129,9 @@ export default function EditProfileScreen() {
                 error={errors.password}
                 style={styles.inputOverride}
               />
+              <Text style={{ fontSize: 12, color: "#fff", opacity: 0.8, marginTop: -12, marginBottom: 12, marginLeft: 4 }}>
+                Mínimo 8 caracteres com maiúscula, minúscula e número.
+              </Text>
             </View>
 
             <View style={styles.section}>

@@ -1,7 +1,7 @@
 import Background from "@/components/Background";
 import InputField from "@/components/InputField";
 import AppLogo from "@/components/ui/Logo";
-import { sendResetCode, resetPassword } from "@/src/services/password";
+import { resetPassword, sendResetCode } from "@/src/services/password";
 import { validateCode, validateConfirmPassword, validateEmail, validatePassword } from "@/src/utils/validation";
 import colors from "@/theme/colors";
 import { useRouter } from "expo-router";

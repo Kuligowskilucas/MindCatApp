@@ -1,8 +1,8 @@
 import Background from "@/components/Background";
 import InputField from "@/components/InputField";
 import AppLogo from "@/components/ui/Logo";
-import colors from "@/theme/colors";
 import { validateConfirmPassword, validateEmail, validateName, validatePassword } from "@/src/utils/validation";
+import colors from "@/theme/colors";
 import { Link, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -92,6 +92,9 @@ export default function RegisterScreen() {
           onChangeText={(t) => { setPassword(t); clearError("password"); }}
           error={errors.password}
         />
+        <Text style={{ fontSize: 12, color: "#fff", opacity: 0.8, marginTop: -12, marginBottom: 12, marginLeft: 4 }}>
+          Mínimo 8 caracteres com maiúscula, minúscula e número.
+        </Text>
         <InputField
           placeholder="Confirmar Senha"
           secureTextEntry

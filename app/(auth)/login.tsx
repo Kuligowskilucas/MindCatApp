@@ -1,15 +1,17 @@
-import React, { useState } from "react";
-import {
-  KeyboardAvoidingView, Platform, Pressable,
-  StyleSheet, Text, Alert, ActivityIndicator,
-} from "react-native";
-import { Link, useRouter } from "expo-router";
 import Background from "@/components/Background";
 import InputField from "@/components/InputField";
 import AppLogo from "@/components/ui/Logo";
-import colors from "@/theme/colors";
 import { useAuth } from "@/src/contexts/AuthContext";
 import { validateEmail, validatePassword } from "@/src/utils/validation";
+import colors from "@/theme/colors";
+import { Link, useRouter } from "expo-router";
+import React, { useState } from "react";
+import {
+  ActivityIndicator,
+  Alert,
+  KeyboardAvoidingView, Platform, Pressable,
+  StyleSheet, Text,
+} from "react-native";
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -69,7 +71,9 @@ export default function LoginScreen() {
           onChangeText={(t) => { setPassword(t); setErrors((e) => ({ ...e, password: null })); }}
           error={errors.password}
         />
-
+        <Text style={{ fontSize: 12, color: "#fff", opacity: 0.8, marginTop: -12, marginBottom: 12, marginLeft: 4 }}>
+          Mínimo 8 caracteres com maiúscula, minúscula e número.
+        </Text>
         <Pressable
           style={({ pressed }) => [styles.button, pressed && !loading && styles.buttonPressed]}
           onPress={handleLogin} disabled={loading}
