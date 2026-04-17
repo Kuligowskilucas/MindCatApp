@@ -122,7 +122,7 @@ export default function EditProfileScreen() {
             <View style={styles.section}>
               <Text style={styles.label}>Nova senha</Text>
               <InputField
-                placeholder="Mín. 6 caracteres"
+                placeholder="Digite a nova senha"
                 secureTextEntry
                 value={password}
                 onChangeText={(t) => { setPassword(t); clearError("password"); }}

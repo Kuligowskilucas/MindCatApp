@@ -2,7 +2,7 @@ import Background from "@/components/Background";
 import InputField from "@/components/InputField";
 import AppLogo from "@/components/ui/Logo";
 import { useAuth } from "@/src/contexts/AuthContext";
-import { validateEmail, validatePassword } from "@/src/utils/validation";
+import { validateEmail } from "@/src/utils/validation";
 import colors from "@/theme/colors";
 import { Link, useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -25,10 +25,10 @@ export default function LoginScreen() {
 
   function validate(): boolean {
     const emailErr = validateEmail(email);
-    const passErr = validatePassword(password);
+    const passErr = !password ? "Digite a senha." : null;
     setErrors({ email: emailErr, password: passErr });
     return !emailErr && !passErr;
-  }
+}
 
   async function handleLogin() {
     if (!validate()) return;
@@ -71,9 +71,6 @@ export default function LoginScreen() {
           onChangeText={(t) => { setPassword(t); setErrors((e) => ({ ...e, password: null })); }}
           error={errors.password}
         />
-        <Text style={{ fontSize: 12, color: "#fff", opacity: 0.8, marginTop: -12, marginBottom: 12, marginLeft: 4 }}>
-          Mínimo 8 caracteres com maiúscula, minúscula e número.
-        </Text>
         <Pressable
           style={({ pressed }) => [styles.button, pressed && !loading && styles.buttonPressed]}
           onPress={handleLogin} disabled={loading}

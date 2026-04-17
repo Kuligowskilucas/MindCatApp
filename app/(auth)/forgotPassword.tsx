@@ -122,6 +122,9 @@ export default function ForgotPasswordScreen() {
               onChangeText={(t) => { setConfirmPassword(t); clearError("confirm"); }}
               error={errors.confirm}
             />
+            <Text style={{ fontSize: 12, color: "#fff", opacity: 0.8, marginTop: -12, marginBottom: 12, marginLeft: 4 }}>
+              Mínimo 8 caracteres com maiúscula, minúscula e número.
+            </Text>
             <Pressable
               style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
               onPress={handleReset} disabled={loading}
