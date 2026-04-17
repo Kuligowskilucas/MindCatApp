@@ -155,6 +155,6 @@ Projeto pessoal de estudo e portfólio. Todos os direitos reservados.
 
 <div align="center">
 
-Feito com 🐱 por **[Seu Nome](https://github.com/Kuligowskilucas)**
+Feito com 🐱 por **[Lucas Gabriel Kuligowski](https://github.com/Kuligowskilucas)**
 
 </div>
