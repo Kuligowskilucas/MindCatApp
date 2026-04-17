@@ -17,7 +17,7 @@
 
 O **MindCat** é um aplicativo de saúde mental desenvolvido para aproximar pacientes e profissionais de psicologia. A proposta é tornar o cuidado com a saúde emocional mais acessível, humano e contínuo — indo além de sessões isoladas de terapia.
 
-Este repositório contém o **frontend mobile** (iOS e Android), construído em React Native com Expo. O backend em Laravel está em [MindCatApi](https://github.com/Kuligowskilucas/MindCatApi).
+O MindCat está em desenvolvimento ativo com previsão de lançamento nas lojas Apple App Store e Google Play. Este repositório contém o **frontend mobile** (iOS e Android), construído em React Native com Expo. O backend em Laravel está em [MindCatApi](https://github.com/Kuligowskilucas/MindCatApi).
 
 ---
 
@@ -149,12 +149,13 @@ Com os seeders da API rodados:
 
 ## 📄 Licença
 
-Projeto pessoal de estudo e portfólio. Todos os direitos reservados.
+© 2026 MindCat. Todos os direitos reservados.
+Este software é proprietário. O código-fonte é disponibilizado publicamente para fins de transparência e documentação, mas não está licenciado para uso, modificação ou redistribuição sem autorização expressa dos autores.
 
 ---
 
 <div align="center">
 
-Feito com 🐱 por **[Lucas Gabriel Kuligowski](https://github.com/Kuligowskilucas)**
+MindCat • Feito com 🐱 por **[Lucas Gabriel Kuligowski](https://github.com/Kuligowskilucas)**
 
 </div>
